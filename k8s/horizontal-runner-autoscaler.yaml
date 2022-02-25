@@ -1,0 +1,25 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: HorizontalRunnerAutoscaler
+metadata:
+  name: k8s-runners-autoscaler
+  namespace: actions-runner-system
+spec:
+  scaleTargetRef:
+    name: dm-next-api-runner-deployment
+  scaleDownDelaySecondsAfterScaleOut: 300
+  metrics:
+  - type: TotalNumberOfQueuedAndInProgressWorkflowRuns
+    repositoryNames:
+    - Dealermade/dm-next-api
+    # - Dealermade/dm-next-web
+  # scaleUpTriggers:
+  #   - githubEvent: {}
+  #     duration: "30m"
+  # scheduledOverrides:
+  #   - startTime: "2022-02-15T23:46:00+05:30"
+  #     endTime: "2022-02-15T23:55:00+05:30"
+  #     recurrenceRule:
+  #       frequency: Daily
+  #     minReplicas: 10
+  minReplicas: 1
+  maxReplicas: 10

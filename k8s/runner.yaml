@@ -1,0 +1,10 @@
+# runner.yaml
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: Runner
+metadata:
+  name: dm-next-api-runner
+  namespace: actions-runner-system
+spec:
+  # organization: Dealermade
+  repository: Dealermade/dm-next-api
+  env: []
