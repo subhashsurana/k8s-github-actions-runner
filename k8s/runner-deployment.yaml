@@ -3,13 +3,13 @@ apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
   name: dm-next-api-runner-deployment
-  namespace: actions-runner-system
+  namespace: default
 spec:
   replicas: 1
   template:
     metadata:
       annotations:
-        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "false"
     spec:
       repository: Dealermade/dm-next-api
       # organization: Dealermade
@@ -18,12 +18,33 @@ spec:
       # securityContext:
       #   fsGroup: 27
       imagePullPolicy: Always
+      ephemeral: true
+      tolerations:
+        - key: "node.kubernetes.io/unreachable"
+          operator: "Exists"
+          effect: "NoExecute"
+          tolerationSeconds: 10      
+      # # dockerdWithinRunnerContainer: true
+      # dockerEnabled: true
+      # dockerMTU: 1400
       # resources:
       #   limits:
-      #     ephemeral-storage: "1Gi"
+      #     cpu: "1.0" 
+      #     memory: "2Gi"
+      #     ephemeral-storage: "4Gi"
       #   requests:
-      #     ephemeral-storage: "500Mi"      
-      ephemeral: true
+      #     cpu: "0.5"
+      #     memory: "1Gi"
+      #     ephemeral-storage: "2Gi"     
+      # dockerdContainerResources:
+      #   limits:
+      #     cpu: "1.0" 
+      #     memory: "2Gi"
+      #     ephemeral-storage: "4Gi"
+      #   requests:
+      #     cpu: "0.5"
+      #     memory: "1Gi"
+      #     ephemeral-storage: "2Gi"
       labels:
         - dm-next-api-runner
       env: 

@@ -36,16 +36,16 @@ enableLeaderElection: true
 # See https://github.com/actions-runner-controller/actions-runner-controller/pull/937 for more details.
 authSecret:
   enabled: true
-  create: true
+  # create: true
   name: "controller-manager"
-#   annotations: {}
+  # annotations: {}
   ### GitHub Apps Configuration
   ## NOTE: IDs MUST be strings, use quotes
-  #github_app_id: ""
-  #github_app_installation_id: ""
-  #github_app_private_key: |
+  # github_app_id: '${GH_APP_ID}'
+  # github_app_installation_id: '${INSTALLATION_ID}'
+  # github_app_private_key: |
   ### GitHub PAT Configuration
-  github_token: '${GITHUB_TOKEN}'
+  #github_token: '${GITHUB_TOKEN}'
   ### Basic auth for github API proxy
   #github_basicauth_username: ""
   #github_basicauth_password: ""
@@ -165,65 +165,65 @@ certManagerEnabled: true
   # {}
   #caBundle: "Ci0tLS0tQk...<base64-encoded PEM bundle containing the CA that signed the webhook's serving certificate>...tLS0K"
 
-githubWebhookServer:
-  enabled: true
-  replicaCount: 1
-  syncPeriod: 1m
-  # useRunnerGroupsVisibility: false
-  secret:
-    enabled: true
-    create: true
-    name: "github-webhook-server"
-    ### GitHub Webhook Configuration
-    github_webhook_secret_token: '$(GITHUB_WEBHOOK_SECRET_TOKEN}'
-  # imagePullSecrets: []
-  # nameOverride: ""
-  # fullnameOverride: ""
-  serviceAccount:
-    # Specifies whether a service account should be created
-    create: false
-    # Annotations to add to the service account
-    annotations: {}
-    # The name of the service account to use.
-    # If not set and create is true, a name is generated using the fullname template
-    name: ""
-  podAnnotations: {}
-  podLabels: {}
-  podSecurityContext: {}
-  # fsGroup: 2000
-  securityContext: {}
-  resources: {}
-  nodeSelector: {}
-  tolerations: []
-  affinity: {}
-  priorityClassName: ""
-  service:
-    type: LoadBalancer
-    annotations: {}
-    ports:
-      - port: 80
-        targetPort: http
-        protocol: TCP
-        name: http
-        #nodePort: someFixedPortForUseWithTerraformCdkCfnEtc
-  ingress:
-    enabled: false
-    ingressClassName: ""
-    annotations: {}
-      # kubernetes.io/ingress.class: nginx
-      # kubernetes.io/tls-acme: "true"
-    hosts:
-      - host: chart-example.local
-        paths: []
-        #  - path: /*
-        #    pathType: ImplementationSpecific
-    tls: []
-    #  - secretName: chart-example-tls
-    #    hosts:
-    #      - chart-example.local
+# githubWebhookServer:
+#   enabled: true
+#   replicaCount: 1
+#   syncPeriod: 1m
+#   # useRunnerGroupsVisibility: false
+#   secret:
+#     enabled: true
+#     create: true
+#     name: "github-webhook-server"
+#     ### GitHub Webhook Configuration
+#     github_webhook_secret_token: '$(GITHUB_WEBHOOK_SECRET_TOKEN}'
+#   # imagePullSecrets: []
+#   # nameOverride: ""
+#   # fullnameOverride: ""
+#   serviceAccount:
+#     # Specifies whether a service account should be created
+#     create: false
+#     # Annotations to add to the service account
+#     annotations: {}
+#     # The name of the service account to use.
+#     # If not set and create is true, a name is generated using the fullname template
+#     name: ""
+#   podAnnotations: {}
+#   podLabels: {}
+#   podSecurityContext: {}
+#   # fsGroup: 2000
+#   securityContext: {}
+#   resources: {}
+#   nodeSelector: {}
+#   tolerations: []
+#   affinity: {}
+#   priorityClassName: ""
+#   service:
+#     type: LoadBalancer
+#     annotations: {}
+#     ports:
+#       - port: 80
+#         targetPort: http
+#         protocol: TCP
+#         name: http
+#         #nodePort: someFixedPortForUseWithTerraformCdkCfnEtc
+#   ingress:
+#     enabled: false
+#     ingressClassName: ""
+#     annotations: {}
+#       # kubernetes.io/ingress.class: nginx
+#       # kubernetes.io/tls-acme: "true"
+#     hosts:
+#       - host: chart-example.local
+#         paths: []
+#         #  - path: /*
+#         #    pathType: ImplementationSpecific
+#     tls: []
+#     #  - secretName: chart-example-tls
+#     #    hosts:
+#     #      - chart-example.local
 
-  # Only one of minAvailable or maxUnavailable can be set
-  podDisruptionBudget:
-    enabled: false
-    # minAvailable: 1
-    # maxUnavailable: 3
+#   # Only one of minAvailable or maxUnavailable can be set
+#   podDisruptionBudget:
+#     enabled: false
+#     # minAvailable: 1
+#     # maxUnavailable: 3
