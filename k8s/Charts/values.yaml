@@ -35,7 +35,7 @@ enableLeaderElection: true
 # the GitHub authn related envvars of the container.
 # See https://github.com/actions-runner-controller/actions-runner-controller/pull/937 for more details.
 authSecret:
-  enabled: true
+  enabled: false
   # create: true
   name: "controller-manager"
   # annotations: {}
